@@ -1,0 +1,22 @@
+import Foundation
+
+let calories = try! String(contentsOf: Bundle.main.url(forResource: "day1", withExtension: "txt")!).components(separatedBy: .whitespacesAndNewlines)
+
+//part one
+var total = 0
+
+let totals = calories.reduce(into: [Int]()) { x, y in
+
+    guard let number = Int(y) else {
+        x.append(total)
+        total = 0
+        return }
+        
+    total += number }.sorted(by: >)
+
+
+//part two
+let top_three = totals[0..<3].reduce(0, +)
+
+print("Part one: \(totals.first!)")
+print("Part two: \(top_three)")
